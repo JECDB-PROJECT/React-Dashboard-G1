@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { axiosInstance } from "../../../netWork/netWork";
 
 export const getContries = async (setCountries, setFiltered) => {
-    axiosInstance.get(`/country`, {
+    axiosInstance.get(`/country/`, {
     }).then((res) => {
         console.log("country", res);
         setCountries(res.data);

@@ -13,13 +13,13 @@ import Table from "../components/table/Table";
 import Badge from "../components/badge/Badge";
 
 // import statusCards from "../assets/JsonData/status-card-data.json";
-// import {
-//   getAllOrder,
-//   DailyOrders,
-//   top10Client,
-//   latestWeekIncome,
-// } from "./../redux/actions/orderAction";
-// import { getUserList } from "./../redux/actions/user";
+import {
+  getOrderList,
+  DailyOrders,
+  top10Client,
+  latestWeekIncome,
+} from "./../redux/actions/Orders";
+import { getUserList } from "./../redux/actions/user";
 // import { GetProductsCategories } from "./../redux/actions/Product";
 import moment from "moment";
 
@@ -171,8 +171,8 @@ const renderOrderBody = (item, index) => (
 );
 
 const Dashboard = () => {
-  // const { users } = useSelector((state) => state.users);
-  // const { orders } = useSelector((state) => state.orders);
+  const { users } = useSelector((state) => state.users);
+  const { orders } = useSelector((state) => state.orders);
   // const { dailyOrders } = useSelector((state) => state.orders);
   // const { TopCustomers } = useSelector((state) => state.orders);
   // const { WeekIncome } = useSelector((state) => state.orders);
@@ -205,13 +205,13 @@ const Dashboard = () => {
   // });
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getUserList());
-  // }, []);
+  useEffect(() => {
+    dispatch(getUserList(1,null));
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getAllOrder());
-  // }, []);
+  useEffect(() => {
+    dispatch(getOrderList(1,null));
+  }, [dispatch]);
 
   // useEffect(() => {
   //   dispatch(DailyOrders());
@@ -243,7 +243,7 @@ const Dashboard = () => {
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4 >{3}</h4>
+                        <h4 >{0}</h4>
                         <span>Total Income in latest week</span>
                       </div>
                     </div>
@@ -277,7 +277,7 @@ const Dashboard = () => {
                         <i class="bi bi-card-checklist"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4 className="fs-3">{3}</h4>
+                        <h4 className="fs-3">{orders.length}</h4>
                         <span>Total Orders</span>
                       </div>
                     </div>
@@ -292,7 +292,7 @@ const Dashboard = () => {
                         <i class="bi bi-person"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4 className="fs-3">{0}</h4>
+                        <h4 className="fs-3">{users.length}</h4>
                         <span>Total Users</span>
                       </div>
                     </div>
