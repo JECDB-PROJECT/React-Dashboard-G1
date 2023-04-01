@@ -10,7 +10,7 @@ import AddUser from '../pages/User/AddUser/AddUser'
 import EditUser from '../pages/User/EditUser/EditUser'
 import Countries from '../pages/Country/Countries/Countries'
 import AddCountry from '../pages/Country/AddCountry/AddCountry'
-import EditCountry from '../pages/Country/EditCountry/EditCountry'
+// import EditCountry from '../pages/Country/EditCountry/EditCountry'
 import Orders from '../pages/Order/Orders/Orders'
 import OrderDetails from '../components/OrderDetails/OrderDetails'
 import PrivateRoute from './PrivateRoute'
@@ -24,9 +24,9 @@ import FormProduct from '../pages/Product/FormProduct/FormProduct'
 import ProductDetails from './../pages/Product/ProductDetails/index'
 import GetGoverment from './../pages/Governate/Governate'
 import AddGovernate from './../pages/Governate/AddGovernate/AddGovernate'
-import EditeGovernate from './../pages/Governate/EditGovernate/EditGovernate'
+// import EditeGovernate from './../pages/Governate/EditGovernate/EditGovernate'
 import GetCities from './../pages/Cities/Cities'
-import EditeCity from './../pages/Cities/EditCities/EditCities'
+// import EditeCity from './../pages/Cities/EditCities/EditCities'
 import AddCities from './../pages/Cities/AddCities/AddCities'
 import { useSelector, useDispatch } from 'react-redux'
 import ThemeAction from '../redux/actions/ThemeAction'
@@ -82,7 +82,7 @@ const Routes = () => {
                         <PrivateRoute path='/EditUser/:id' exact component={EditUser}/>
                         <PrivateRoute path='/Countries' exact component={Countries}/>
                         <PrivateRoute path='/AddCountry' exact component={AddCountry}/>
-                        <PrivateRoute path='/EditCountry/:id' exact component={EditCountry}/>
+                        {/* <PrivateRoute path='/EditCountry/:id' exact component={EditCountry}/> */}
                         <PrivateRoute path='/orders' exact component={Orders}/>
                         <PrivateRoute path='/orderDetails' exact component={OrderDetails}/>            
                         <PrivateRoute path="/category" exact component={Category}/>
@@ -100,9 +100,9 @@ const Routes = () => {
                         <PrivateRoute path="/ProductDetails/:id" exact component={ProductDetails}/>
                         <PrivateRoute path="/Governate" exact component={GetGoverment}/>
                         <PrivateRoute path="/AddGovernate" exact component={AddGovernate}/>
-                        <PrivateRoute path="/EditeGovernate/:nameg" exact component={EditeGovernate}/>
+                        {/* <PrivateRoute path="/EditeGovernate/:nameg" exact component={EditeGovernate}/> */}
                         <PrivateRoute path="/Cities" exact component={GetCities}/>
-                        <PrivateRoute path="/EditeCity/:id" exact component={EditeCity}/>
+                        {/* <PrivateRoute path="/EditeCity/:id" exact component={EditeCity}/> */}
                         <PrivateRoute path="/AddCety" exact component={AddCities}/>
                         <PrivateRoute path="/UserDetails/:id" exact component={UserDetails}/>
                         {/* <PrivateRoute path="/EditAddress/:id" exact component={EditAddress}/> */}

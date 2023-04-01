@@ -17,6 +17,11 @@ import './assets/css/grid.css'
 import './assets/css/theme.css'
 import './assets/css/index.css'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPenToSquare, faTrashAlt, faSave } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faPenToSquare, faTrashAlt, faSave)
+
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
