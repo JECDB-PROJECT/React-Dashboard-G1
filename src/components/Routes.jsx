@@ -101,7 +101,7 @@ const Routes = () => {
                         <PrivateRoute path="/Governate" exact component={GetGoverment}/>
                         <PrivateRoute path="/AddGovernate" exact component={AddGovernate}/>
                         {/* <PrivateRoute path="/EditeGovernate/:nameg" exact component={EditeGovernate}/> */}
-                        <PrivateRoute path="/Cities" exact component={GetCities}/>
+                        <PrivateRoute path="/Cities" exact component={GetCities}/> 
                         {/* <PrivateRoute path="/EditeCity/:id" exact component={EditeCity}/> */}
                         <PrivateRoute path="/AddCety" exact component={AddCities}/>
                         <PrivateRoute path="/UserDetails/:id" exact component={UserDetails}/>
