@@ -259,7 +259,7 @@ const Dashboard = () => {
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4 className="fs-3">{totalIncom.toFixed(0)}</h4>
+                        <h4>{0}</h4>
                         <span>Total Income</span>
                       </div>
                     </div>
