@@ -16,7 +16,7 @@ export const signIn = (data)=> async(dispatch)=>{
         });
         toast.success("Welcome again,...", {
                 position: toast.POSITION.TOP_RIGHT,
-            });
+            })
     }catch(err){
         console.log(err.response)
         toast.error(err.response?.data, {

@@ -5,8 +5,10 @@ import { signIn } from "../../redux/actions/authAction";
 import './Login.css';
 import '../../assets/css/index.css'
 import "react-toastify/dist/ReactToastify.css";
+// import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
+    // const navigate = useNavigate();
     // const auth = useSelector((state) => state.auth.authenticate);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -18,13 +20,27 @@ export default function Login(props) {
     const token = localStorage.getItem('token');
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(signIn(creds));
+        dispatch(signIn(creds)
+
+        // window.open("https://ecommerce-jumia-react-dashboard.netlify.app/"),
+        // history.push('/')
+        
+        ).then(() => {
+            history.push('/')
+           
+        });
         
         setCreds({ email: "", password: "" });
+        // setTimeout(()=>{
+        //     window.location.assign(window.location.origin + "/");
+        // }, 2000)
+        
     };
     useEffect(() => {        
         if(token){
-            history.push('/')
+            history.push('/');
+            
+            
         }
         }, [history, token])
 
@@ -57,14 +73,14 @@ const forPassType =(e)=>
                                 <h4 className="fs-3">Sign-In</h4>
                                 <label for="inputemail4" className="form-label fw-bold" style={{ fontSize: "13px" }}
                                 >Email </label>
-                                <input type="email" className="form-control" id="inputemail4" 
+                                <input type="email" className="form-control" id="inputemail4" placeholder="enter: admin@gmail.com"
                                 value={creds.email}
                                 onChange={(e) => setCreds({ ...creds, email: e.target.value })}/>
                             </div>
                             <div className="col-md-12 position-relative">
                                 <label for="inputpass4" className="form-label fw-bold" style={{ fontSize: "13px" }}
                                 >Password </label>
-                                <input type="password" className="form-control " id="inputpass4" 
+                                <input type="password" className="form-control " id="inputpass4" placeholder="pass: 123456"
                                 value={creds.password}
                                 onChange={(e) => setCreds({ ...creds, password: e.target.value })}/>
                                 <i className="bi bi-eye-slash-fill eye position-absolute " onClick={forPassType}></i>
