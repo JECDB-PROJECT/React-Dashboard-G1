@@ -26,6 +26,25 @@ export const getUserList = (pag, x) => async (dispatch) => {
   }
 };
 
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    //   console.log(dispatch)
+    const response = await axiosInstance.get(`/users`);
+    // console.log('response',response)
+    dispatch({
+      type: "GET_ALL_USERS",
+      payload: response.data.Users,
+    });
+
+  } catch (err) {
+    console.log(err);
+    toast.error(`${err.message} `, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+};
+
 export const AddNewUser = (prod) => async (dispatch) => {
   try {
     const response = await axiosInstance.post("/users/addNew", prod);

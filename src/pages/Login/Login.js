@@ -18,9 +18,11 @@ export default function Login(props) {
     const token = localStorage.getItem('token');
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(signIn(creds));
+        dispatch(signIn(creds) , history.push('/'));
         
         setCreds({ email: "", password: "" });
+
+       
     };
     useEffect(() => {        
         if(token){
