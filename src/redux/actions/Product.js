@@ -88,3 +88,19 @@ export const UpdateProduct = (pro, id) => async (dispatch) => {
   }
 };
 
+
+export const GetProductsCategories = () => async (dispatch) => {
+  try {
+      //   console.log(dispatch)
+      const response = await axiosInstance.get(`/products/chart/productCategories`);
+      console.log('response', response)
+      dispatch({
+          type: "GET_Products_CATEGORIES",
+          payload: response.data,
+      });
+  } catch (err) {
+      console.log(err);
+  }
+};
+
+

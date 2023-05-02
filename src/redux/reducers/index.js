@@ -8,14 +8,14 @@ import { UsersReducer } from "./user";
 import { CitiesReducer } from "./Cities";
 import { GovReducer } from "./Governate";
 import { countriesReducer } from "./country";
-import { OrdersReducer } from "./Orders";
+import ordersReducer from './Orders'
 
 const rootReducer = combineReducers({
   ThemeReducer,
   auth: authReducer,
   products: ProductsReducer,
   categories: categoryReducer,
-  orders: OrdersReducer,
+  orders:ordersReducer,
   Cities:CitiesReducer,
   goverments:GovReducer,
   countries:countriesReducer,

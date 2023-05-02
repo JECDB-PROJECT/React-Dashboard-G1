@@ -12,15 +12,15 @@ import Table from "../components/table/Table";
 
 import Badge from "../components/badge/Badge";
 
-// import statusCards from "../assets/JsonData/status-card-data.json";
+import statusCards from "../assets/JsonData/status-card-data.json";
 import {
-  getOrderList,
+  getAllOrder,
   DailyOrders,
   top10Client,
   latestWeekIncome,
 } from "./../redux/actions/Orders";
-import { getUserList } from "./../redux/actions/user";
-// import { GetProductsCategories } from "./../redux/actions/Product";
+import { getAllUsers } from "./../redux/actions/user";
+import { GetProductsCategories } from "./../redux/actions/Product";
 import moment from "moment";
 
 const chartOptions = {
@@ -173,10 +173,10 @@ const renderOrderBody = (item, index) => (
 const Dashboard = () => {
   const { users } = useSelector((state) => state.users);
   const { orders } = useSelector((state) => state.orders);
-  // const { dailyOrders } = useSelector((state) => state.orders);
-  // const { TopCustomers } = useSelector((state) => state.orders);
-  // const { WeekIncome } = useSelector((state) => state.orders);
-  // const { productsCategories } = useSelector((state) => state.products);
+  const { dailyOrders } = useSelector((state) => state.orders);
+  const { TopCustomers } = useSelector((state) => state.orders);
+  const { WeekIncome } = useSelector((state) => state.orders);
+  const { productsCategories } = useSelector((state) => state.products);
   var totalIncom = 0;
   var totalIncomberweek = 0;
   var date = new Date();
@@ -206,26 +206,26 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserList(1,null));
+    dispatch(getAllUsers());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllOrder());
+  }, []);
+
+  useEffect(() => {
+    dispatch(DailyOrders());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getOrderList(1,null));
+    dispatch(GetProductsCategories());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(DailyOrders());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(GetProductsCategories());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(top10Client());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(latestWeekIncome());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(top10Client());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(latestWeekIncome());
+  }, [dispatch]);
 
   const themeReducer = useSelector((state) => state.ThemeReducer.mode);
 
@@ -243,14 +243,13 @@ const Dashboard = () => {
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4 >{0}</h4>
+                        <h4 >{WeekIncome.toFixed(0)}</h4>
                         <span>Total Income in latest week</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className="col-12 ">
                 <div className="row">
                   <div className="col-12">
@@ -259,7 +258,7 @@ const Dashboard = () => {
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div className="status-card__info">
-                        <h4>{0}</h4>
+                        <h4 className="fs-3">{totalIncom.toFixed(0)}</h4>
                         <span>Total Income</span>
                       </div>
                     </div>
@@ -268,7 +267,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="col-12">
+            <div className="row col-12">
               <div className="col-12 ">
                 <div className="row">
                   <div className="col-12">
@@ -293,7 +292,7 @@ const Dashboard = () => {
                       </div>
                       <div className="status-card__info">
                         <h4 className="fs-3">{users.length}</h4>
-                        <span>Total Users</span>
+                        <span>Total customer</span>
                       </div>
                     </div>
                   </div>
@@ -303,9 +302,146 @@ const Dashboard = () => {
           </div>
         </div>
 
+        <div className="row col-12 col-lg-6 col-md-12 col-sm-6 ">
+          <div className="col-12">
+            <div>
+              <h2>Categories</h2>
+              {productsCategories.length === 0 ? (
+                <h1>toast</h1>
+              ) : (
+                <Chart className="card"
+                  width="100%"
+                  height="100%"
+                  chartType="PieChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    ["Category", "Products"],
+                    ...productsCategories.map((x) => [x._id, x.count]),
+                  ]}
+                ></Chart>
+              )}
+            </div>
+          </div>
+          <div className="col-12">
+            <h2>Top 10 Customers</h2>
+            {TopCustomers.length === 0 ? (
+              <h1>toast</h1>
+            ) : (
+              <Chart className="card"
+                width="100%"
+                height="400px"
+                chartType="ScatterChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ["userId", "totalPrice"],
+                  ...TopCustomers.map((x) => [x._id, x.totalTurnover]),
+                ]}
+                options={{
+                  title: "",
+                  hAxis: { title: "userId" },
+                  vAxis: { title: "totalPrice" },
+                  trendlines: {
+                    0: {
+                      type: "exponential",
+                      visibleInLegend: true,
+                      color: "green",
+                    },
+                  },
+                }}
+                rootProps={{ "data-testid": "2" }}
+              ></Chart>
+            )}
+          </div>
+        </div>
       </div>
-      
+      <div className="px-3 px-md-0">
+        <h2>Sales</h2>
+        {dailyOrders.length === 0 ? (
+          <h1>toast</h1>
+        ) : (
+          <Chart className="card"
+            width="100%"
+            height="400px"
+            chartType="AreaChart"
+            data={[
+              ["Date", "Sales"],
+              ...dailyOrders.map((x) => [x._id, x.sales]),
+            ]}
+          ></Chart>
+        )}
+      </div>
 
+      {/* <h2 className="page-header">Dashboard</h2>
+            <div className="row">
+                <div className="col-6">
+                    <div className="row">
+                        {
+                            statusCards.map((item, index) => (
+                                <div className="col-6" key={index}>
+                                    <StatusCard
+                                        icon={item.icon}
+                                        count={item.count}
+                                        title={item.title}
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className="col-6">
+                    <div className="card full-height"> */}
+      {/* chart */}
+      {/* <Chart
+                            options={themeReducer === 'theme-mode-dark' ? {
+                                ...chartOptions.options,
+                                theme: { mode: 'dark'}
+                            } : {
+                                ...chartOptions.options,
+                                theme: { mode: 'light'}
+                            }}
+                            series={chartOptions.series}
+                            type='line'
+                            height='100%'
+                        />
+                    </div>
+                </div>
+                <div className="col-4">
+                    <div className="card">
+                        <div className="card__header">
+                            <h3>top customers</h3>
+                        </div>
+                        <div className="card__body">
+                            <Table
+                                headData={topCustomers.head}
+                                renderHead={(item, index) => renderCusomerHead(item, index)}
+                                bodyData={topCustomers.body}
+                                renderBody={(item, index) => renderCusomerBody(item, index)}
+                            />
+                        </div>
+                        <div className="card__footer">
+                            <Link to='/'>view all</Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-8">
+                    <div className="card">
+                        <div className="card__header">
+                            <h3>latest orders</h3>
+                        </div>
+                        <div className="card__body">
+                            <Table
+                                headData={latestOrders.header}
+                                renderHead={(item, index) => renderOrderHead(item, index)}
+                                bodyData={latestOrders.body}
+                                renderBody={(item, index) => renderOrderBody(item, index)}
+                            />
+                        </div>
+                        <div className="card__footer">
+                            <Link to='/'>view all</Link>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
     </div>
   );
 };

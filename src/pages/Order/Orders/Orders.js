@@ -1,78 +1,140 @@
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import OrderTable from "../../../components/OrderTable/OrderTable";
+import { getOrdersList, total, getOrderPaginationtList } from './../../../redux/actions/Orders';
+import { Link } from "react-router-dom";
+import Pagination from "../../../components/Pagination/Pagination";
+import { useParams } from 'react-router-dom';
+import { getAllGovernment } from '../../../redux/actions/Governate'
 import './Orders.css';
-import {
-  Card,
-  Table,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import {  deleteOrderByAdmin, getOrderList } from '../../../redux/actions/Orders';
-
-
 
 export default function Orders() {
-    const orders  = useSelector((state) => state.orders.orders);
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(getOrderList())
-      }, [dispatch]);
-      console.log(orders);
+const [searchTerm,setSearchTerm] = useState('')
 
-      const handeldelete = (id) => {
-        console.log(id);
-        dispatch(deleteOrderByAdmin(id));
-      };
-    
+    const dispatch = useDispatch();
+    const { orders } = useSelector(state => state.orders)
+    const { govers } = useSelector(state => state.goverments)
+    // console.log(">>>>>>",gov)
+    const { num } = useParams() || 1;
+    const [page, setPage] = useState(num);
+    const pages = total || 1;
+    useEffect(() => {
+        dispatch(getAllGovernment())
+    }, [dispatch])
+
+    const [state, setState] = useState({
+        checValue: "",
+        checkKey: ""
+    });
+
+    const { checkKey, checValue } = state
+
+    const handelIKeyChange = (e) => {
+        let { name, value } = e.target;
+        setState({ ...state, [name]: value })
+    }
+    const handelValuChange = (e) => {
+        let { name, value } = e.target;
+        setState({ ...state, [name]: value })
+    }
+
+    // useEffect(() => {
+    //     dispatch(getOrdersList());
+    // }, []);
+    useEffect(() => {
+        dispatch(getOrderPaginationtList(page, state));
+    }, [page, state]);
     return (
         <>
-            <Container fluid>
-        <Row>
-          <Col md="12">
-            <Card className="strpied-tabled-with-hover">
-              <Card.Header>
-                <Card.Title as="h4">Orders Details</Card.Title>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">orderDate</th>
-                      <th className="border-0">isPaid</th>
-                      <th className="border-0">userId</th>
-                      <th className="border-0">paymentMethode</th>
-                      <th className="border-0">Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map((item,index) => (
-                      <tr key={item._id}>
-                        <td>{index+1}</td>
-                        <td>{item.createdAt}</td>
-                        <td>{`${item.isPaid}`}</td>
-                        {/* <td>{console.log(`${item.isPaid}`)}</td> */}
-                        <td>{item.userId}</td>
-                        <td>{item.paymentmethod}</td>
-                        <td><i
-              className="bi bi-trash-fill delicon   col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
-              onClick={() => handeldelete(item._id)}
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="Delete"
-            ></i></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+
+
+
+
+            <div className="ms-auto row mb-3 col-12 col-lg-6 ">
+            <div className="topnav__search col-6">
+                <input type="text" placeholder='Search here...' onChange={(event) =>{
+                    setSearchTerm(event.target.value)
+                }}/>
+                <i className='bx bx-search'></i>
+            </div>
+                <div className="col-3">
+                    <select placeholder="checkKey " class="form-control  topnav__search" name="checkKey" onChange={handelIKeyChange}>
+                        <option hidden={true} value=''>select...</option>
+                        <option disabled={true} value=''>select...</option>
+                        <option value='payMeth'>Payment Method</option>
+                        <option value='governate'>governate</option>
+                        <option value='Status'>Status</option>
+                        {/* <option value='category'>category</option> */}
+
+                    </select>
+                    </div>
+                    
+                <div className="col-3">
+                    <select disabled={checkKey === ''} placeholder="checValue " class="form-control  topnav__search" name="checValue" onChange={handelValuChange}>
+                        <option hidden={true} value=''>select...</option>
+                        {
+                            checkKey && checkKey === 'payMeth' &&
+                            <>
+                                <option value='PayPal'>PayPal</option>
+                                <option value='CashOnDelivery'>CashOnDelivery</option>
+                            </>
+                        }
+                        {checkKey && checkKey === 'governate' &&
+                            govers && govers.map((gover, index) => {
+                                return (
+                                    <>
+                                        <option value={gover.name}>{gover.name}</option>
+                                    </>)
+                            })
+                        }
+                        {
+                            checkKey && checkKey === 'Status' &&
+
+                            <>
+                                <option value='Cancelled'>Cancelled</option>
+                                <option value='Delivered'>Delivered</option>
+                                <option value='Paid'>Paid</option>
+                            </>
+                        }
+
+
+
+
+                    </select></div>
+                    
+            </div>
+
+            <div className="container table-responsive card">
+
+                <table className="table table-borderless  ">
+                    <thead className="bg-table-th" >
+                        <tr className="border-bottom ">
+                            <th className="th1"> <span className="col">#</span> </th>
+                            <th className="th2"> <span className="ml-2 col">Date</span> </th>
+                            <th className="th2"> <span className="ml-2 col">User</span> </th>
+                            <th className="th3"> <span className="ml-2 col">All Locations</span> </th>
+                            <th className="th4"> <span className="ml-2 col">Total</span> </th>
+                            <th className="th5"> <span className="ml-2 col">Payment Method</span> </th>
+                            <th className="th5"> <span className="ml-2 col">Status</span> </th>
+                            <th className="th5"> <span className="ml-2 col">Cancel</span> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders && orders.filter((val)=>{
+                if(searchTerm == ""){
+                  return val
+                }else if(val.shippingAddress.fullName.toLowerCase().includes(searchTerm.toLowerCase())){
+                  return val
+                }
+              }).map((order, index) => {
+                            return (
+                                <OrderTable key={order._id} index={index} orderData={order} />
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination page={page || 1} pages={pages} changePage={setPage} />
         </>
     );
 }

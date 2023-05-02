@@ -29,8 +29,11 @@ export default function Login(props) {
             history.push('/')
            
         });
+        dispatch(signIn(creds) , history.push('/'));
         
         setCreds({ email: "", password: "" });
+
+       
         // setTimeout(()=>{
         //     window.location.assign(window.location.origin + "/");
         // }, 2000)

@@ -16,6 +16,12 @@ export const ProductsReducer = (state = initialize, action) => {
                 ...state,
                 products: action.payload
             }
+
+        case "GET_Products_CATEGORIES":
+            return {
+                ...state,
+                productsCategories: action.payload
+            }
         case "DELET_PRODUCT":
             return {
                 ...state,

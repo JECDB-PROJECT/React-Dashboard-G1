@@ -11,7 +11,13 @@ export const UsersReducer = (state = initialize, action) => {
                 ...state,
                 users: action.payload
             }
-        
+
+        case "GET_ALL_USERS":
+            return {
+                ...state,
+                users: action.payload
+            }
+
         case "DELET_USER":
             return {
                 ...state,
@@ -28,13 +34,13 @@ export const UsersReducer = (state = initialize, action) => {
                 ...state,
                 user: action.payload
             }
-        
+
         case "UPDATE_USER":
             return {
                 ...state,
                 user: action.payload
             }
-        
+
         default:
             return state;
     }
