@@ -24,12 +24,12 @@ export const categoryReducer = (state = initialize, action) => {
     case "DELETE_Category":
       return {
         ...state,
-        //categories: action.payload.data
+        categories: action.payload
       }
     case "ADD_Category":
       return {
         ...state,
-        //categories: action.payload.data
+        categorie: action.payload
       }
     case "UPDATE_Category":
       return {

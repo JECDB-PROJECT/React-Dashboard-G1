@@ -12,13 +12,16 @@ import { getCategoryList, deleteCategory } from './../../redux/actions/Category'
 
 export default function Category() {
 
-    const { categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const { num } = useParams() || 1;
 
-  
 
+  const [categortId, setCategortId] = useState();
   const [page, setPage] = useState(num);
+  const handelOpen = (id) => {
+    setCategortId(id)
+  }
   // const [pages, setPages] = useState(1);
   const pages = total;
   // const { categories } = useSelector(state => state.categories)
@@ -51,7 +54,7 @@ export default function Category() {
       label: "image",
       type: "action",
       payload({ row }) {
-        return <img src={APIURL + row.image[0]} alt="" height="50px" />;
+        return <img src={APIURL + row?.image[0]} alt="" height="50px" />;
       },
     },
     {
@@ -76,12 +79,6 @@ export default function Category() {
               to={"/CategoryDetails/" + row._id}
               className="col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
             >
-              <i
-                className="bi bi-eye showicon"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Review"
-              ></i>
             </Link>
             <Link
               to={"/AddCategory/" + row._id}
@@ -96,11 +93,13 @@ export default function Category() {
             </Link>
             <i
               className="bi bi-trash-fill delicon   col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
-              onClick={() => handeldelete(row._id)}
-              data-bs-toggle="tooltip"
+              onClick={() => handelOpen(row._id)}
+              // data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Delete"
+              data-bs-toggle="modal" data-bs-target="#exampleModal"
             ></i>
+
           </div>
         );
       },
@@ -108,11 +107,28 @@ export default function Category() {
   ];
   return (
     <div className="container ">
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden='true'>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Delete Category</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              are you suer delete this
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn" style={{ color: "orange" }} data-bs-dismiss="modal" onClick={() => handeldelete(categortId)}>Sure</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <Link to="/AddCategory">
         <button className="btn btn-btn m-3 ">New Category</button>
       </Link>
       <div className="container ">
-        <div className="ms-auto row mb-3 col-lg-6">
+        {/* <div className="ms-auto row mb-3 col-lg-6">
           <div className="topnav__search col-6">
             <input
               type="text"
@@ -123,11 +139,11 @@ export default function Category() {
             />
             <i className="bx bx-search"></i>
           </div>
-        </div>
-        {categories.length ? (
+        </div> */}
+        {categories && categories?.length ? (
           <>
             <Table columns={columns} rows={categories} />
-            <Pagination page={page || 1} pages={pages} changePage={setPage} />
+
           </>
         ) : (
           "no data"

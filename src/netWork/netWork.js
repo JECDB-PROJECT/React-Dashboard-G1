@@ -17,5 +17,4 @@ axiosInstance.interceptors.request.use(
     }
 )
 
-// export const APIURL = 'http://localhost:3030/'
-export const APIURL = 'https://ecommerce-dashboard-website-api2.onrender.com/api'
+export const APIURL = 'https://ecommerce-dashboard-website-api2.onrender.com/'

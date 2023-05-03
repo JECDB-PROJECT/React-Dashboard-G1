@@ -13,13 +13,13 @@ function Select({ options, placeholder, label, name, ...rest }) {
   return (
     <div>
       <Label label={label} />
-      <select class="form-control"
+      <select className="form-control"
         {...field}
         {...rest}
         placeholder={placeholder}
         onChange={onChange}
       >
-        <option class="form-control" disabled selected key={1} value={null}>
+        <option className="form-control" disabled selected key={1} value={null}>
           {placeholder}
         </option>
         {options.map((item) => (
@@ -28,7 +28,7 @@ function Select({ options, placeholder, label, name, ...rest }) {
           </option>
         ))}
       </select>
-      {!!error && <div class="invalid-feedback">{error}</div>}
+      {!!error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 }

@@ -8,10 +8,10 @@ const UploadImages = ({ name, label,setFiles, ...rest }) => {
   
   
   return (
-    <div class="mb-3">
+    <div className="mb-3">
       <Label label={label} />
       <input
-        class="form-control"
+        className="form-control"
         type="file"
         id="formFileMultiple"
         {...rest}
@@ -20,7 +20,7 @@ const UploadImages = ({ name, label,setFiles, ...rest }) => {
         multiple
         onChange={(e) => setFiles(e.target.files)}
       />
-      {!!error && <div class="invalid-feedback">{error}</div>}
+      {!!error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };

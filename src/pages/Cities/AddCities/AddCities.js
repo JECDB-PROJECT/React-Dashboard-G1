@@ -43,7 +43,7 @@ export default function AddCities() {
 
 
             <Link to="/Cities" className="nav-link">
-                <button type="button" class="btn btn-btn">Back</button></Link>
+                <button type="button" className="btn btn-btn">Back</button></Link>
 
             <div className="productBottom ">
                 <form className="productForm row" onSubmit={handelSubmet}>

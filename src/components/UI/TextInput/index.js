@@ -9,8 +9,8 @@ const TextInput = ({ name, label, ...rest }) => {
   return (
     <div>
       <Label label={label} />
-      <input class="form-control" {...rest} {...field} />
-      {!!error && <div class="invalid-feedback">{error}</div>}
+      <input className="form-control" {...rest} {...field} />
+      {!!error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };

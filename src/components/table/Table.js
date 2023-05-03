@@ -73,7 +73,7 @@ export function Table({ columns, rows }) {
             return (
               <tr
                 className="border-bottom"
-                hover
+                // hover
                 role="checkbox"
                 tabIndex={-1}
                 key={row._id}

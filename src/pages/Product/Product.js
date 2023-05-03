@@ -23,6 +23,14 @@ export default function Products() {
   
   const [search, setSearch] = useState();
 
+  const [categortId, setCategortId] = useState();
+  const [open, setOpen] = useState(false);
+  const handelOpen=(id)=>{
+    setOpen(true)
+    setCategortId(id)
+  }
+
+
   
   useEffect(() => {
     dispatch(getProductList(page, { search }));
@@ -72,12 +80,6 @@ export default function Products() {
               to={"/ProductDetails/" + row._id}
               className="col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
             >
-              <i
-                class="bi bi-eye showicon"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Review"
-              ></i>
             </Link>
             <Link
               to={"/FormProduct/" + row._id}
@@ -92,10 +94,10 @@ export default function Products() {
             </Link>
             <i
               className="bi bi-trash-fill delicon   col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
-              onClick={() => handeldelete(row._id)}
-              data-bs-toggle="tooltip"
+              onClick={() => handelOpen(row._id)}
               data-bs-placement="top"
               title="Delete"
+               data-bs-toggle="modal" data-bs-target="#exampleModal"
             ></i>
           </div>
         );
@@ -104,6 +106,23 @@ export default function Products() {
   ];
   return (
     <div className="container ">
+       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden={open.toString()}>
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Delete Product</h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        are you suer delete this product..!
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" className="btn" style={{color:"orange"}}  data-bs-dismiss="modal" onClick={() => handeldelete(categortId)}>Sure</button>
+      </div>
+    </div>
+  </div>
+</div>
       <Link to="/FormProduct">
         <button className="btn btn-btn m-3 ">New Product</button>
       </Link>
