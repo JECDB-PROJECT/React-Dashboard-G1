@@ -46,7 +46,6 @@ export default function AddUser() {
   const handelSubmet = (e) => {
     e.preventDefault();
     if (!name || !email || !password || !phone) {
-      // if (!name || !email ||!phone) {
       setError("please enter values in fields")
     } else {
       dispatch(AddNewUser(state))

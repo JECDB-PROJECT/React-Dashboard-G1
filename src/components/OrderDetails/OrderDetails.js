@@ -1,19 +1,11 @@
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory,useParams } from 'react-router-dom';
-// import { cancelOrder, changStatusOrder, details } from '../../redux/actions/orderAction'
 
 export default function OrderDetails() {
-    // const {order} = useSelector(state => state.orders)
     const { order } = useSelector(state => state.orders.orderDetails)
-    // let { id } = useParams();
     const history = useHistory()
     let dispatch = useDispatch()
-    // useEffect(() => {
-    //     if(order._id){
-    //        history.push('/orders)
-    //     }
-    // }, [dispatch]);
     return (
         <>
             {order && <div>
@@ -196,27 +188,12 @@ export default function OrderDetails() {
 
                     </div>
                 </div>
-                {/* <div className="w-100 text-center">{order.isDelivered ?
-                    (<h6 className="badge rounded-pill bg-success w-25 mt-3">Delivered</h6>) :
-                    (<button className="btn btn-btn w-25  mt-3" disabled={!order.isPaid || order.isCancelled}
-                        onClick={() => { dispatch(changStatusOrder(order._id)) ;history.push('/orders') }}> Deliver</button>)
-                }</div> */}
                 <div className="w-100 text-center">{order.isDelivered &&
                     (<h6 className="badge rounded-pill bg-success w-25 mt-3">Delivered</h6>) 
                 }</div>
-                {/* <div className="w-100 text-center">{order.isPaid ?
-                    (<h6 className="badge rounded-pill bg-info w-25 mt-3">Paid</h6>) :
-                    (<button className="btn btn-btn w-25  mt-3" disabled={order.isCancelled}
-                        onClick={() => { dispatch(changStatusOrder(order._id)) ;history.push('/orders')}}> Pay</button>)
-                }</div> */}
                 <div className="w-100 text-center">{order.isPaid &&
                     (<h6 className="badge rounded-pill bg-info w-25 mt-3">Paid</h6>)
                 }</div>
-                {/* <div className="w-100 text-center">{order.isCancelled ?
-                    (<h6 className="badge rounded-pill bg-danger w-25 mt-3">Cancelled</h6>) :
-                    (<button className="btn btn-btn w-25  mt-3" disabled={order.isDelivered}
-                        onClick={() => { dispatch(cancelOrder(order._id)); history.push('/orders')}}> Cancel</button>)
-                }</div> */}
                 <div className="w-100 text-center">{order.isCancelled &&
                     (<h6 className="badge rounded-pill bg-danger w-25 mt-3">Cancelled</h6>)
                 }</div>

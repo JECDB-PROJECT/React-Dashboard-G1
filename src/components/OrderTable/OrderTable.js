@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { cancelOrder, deliverOrder, details,changStatusOrder } from '../../redux/actions/Orders'
 import './OrderTable.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function OrderTable({ orderData,index }) {
     let dispatch = useDispatch()

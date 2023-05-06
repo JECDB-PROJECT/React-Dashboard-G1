@@ -7,7 +7,6 @@ import { GetSingleCategory } from './../../redux/actions/Category';
 import { APIURL } from '../../netWork/netWork';
 
 export default function CategoryDetails() {
-    //const { category } = useSelector((state) => state.categories);
     const { category } = useSelector((state) => state.categories);
     const dispatch = useDispatch();
   

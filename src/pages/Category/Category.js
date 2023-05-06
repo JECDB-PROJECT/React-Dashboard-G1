@@ -22,12 +22,8 @@ export default function Category() {
   const handelOpen = (id) => {
     setCategortId(id)
   }
-  // const [pages, setPages] = useState(1);
   const pages = total;
-  // const { categories } = useSelector(state => state.categories)
-  // useEffect(() => {
-  //     dispatch(getCategoryListAll())
-  // }, []);
+  
   const [state] = useState({
     checValue: "",
     checkKey: "",
@@ -74,12 +70,7 @@ export default function Category() {
       type: "action",
       payload({ row }) {
         return (
-          <div className=" row justify-content-between align-content-center  ">
-            <Link
-              to={"/CategoryDetails/" + row._id}
-              className="col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
-            >
-            </Link>
+          <div className=" row justify-content-between align-content-center">
             <Link
               to={"/AddCategory/" + row._id}
               className="col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
@@ -94,7 +85,6 @@ export default function Category() {
             <i
               className="bi bi-trash-fill delicon   col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
               onClick={() => handelOpen(row._id)}
-              // data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Delete"
               data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -128,18 +118,6 @@ export default function Category() {
         <button className="btn btn-btn m-3 ">New Category</button>
       </Link>
       <div className="container ">
-        {/* <div className="ms-auto row mb-3 col-lg-6">
-          <div className="topnav__search col-6">
-            <input
-              type="text"
-              placeholder="Search here..."
-              onChange={(event) => {
-                setSearch(event.target.value);
-              }}
-            />
-            <i className="bx bx-search"></i>
-          </div>
-        </div> */}
         {categories && categories?.length ? (
           <>
             <Table columns={columns} rows={categories} />

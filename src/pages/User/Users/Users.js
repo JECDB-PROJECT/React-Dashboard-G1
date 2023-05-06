@@ -70,17 +70,6 @@ console.log(users);
       payload({ row }) {
         return (
           <div className=" row justify-content-between align-content-center  ">
-            <Link
-              to={"/EditUser/" + row._id}
-              className="col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
-            >
-              <i
-                className="bi bi-pencil-square upicon"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Edit"
-              ></i>
-            </Link>
             <i
               className="bi bi-trash-fill delicon   col-12 d-flex col-md-4 justify-content-center text-center align-content-center"
               onClick={() => handeldelete(row._id)}

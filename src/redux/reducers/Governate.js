@@ -6,7 +6,6 @@ const initialize = {
 export const GovReducer = (state = initialize, action) => {
     switch (action.type) {
         case "GET_ALL_GOVERMENT":
-            console.log(action.payload, 'r')
             return {
                 ...state,
                 govers: action.payload
@@ -32,13 +31,11 @@ export const GovReducer = (state = initialize, action) => {
                 ...state
             }
         case "GET_GOV_LIST_PAGE":
-            console.log(action.payload, 'kk')
             return {
                 ...state,
                 govers: action.payload
-            } 
-             case "GET_ALL_GOVERMENT_NAME_COUNTRY":
-            console.log(action.payload, 'r')
+            }
+        case "GET_ALL_GOVERMENT_NAME_COUNTRY":
             return {
                 ...state,
                 govers: action.payload

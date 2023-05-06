@@ -5,11 +5,9 @@ import { signIn } from "../../redux/actions/authAction";
 import './Login.css';
 import '../../assets/css/index.css'
 import "react-toastify/dist/ReactToastify.css";
-// import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
-    // const navigate = useNavigate();
-    // const auth = useSelector((state) => state.auth.authenticate);
+    
     const dispatch = useDispatch();
     const history = useHistory();
     const [creds, setCreds] = useState({
@@ -22,8 +20,7 @@ export default function Login(props) {
         e.preventDefault();
         dispatch(signIn(creds)
 
-        // window.open("https://ecommerce-jumia-react-dashboard.netlify.app/"),
-        // history.push('/')
+        
         
         ).then(() => {
             history.push('/')
@@ -33,10 +30,6 @@ export default function Login(props) {
         
         setCreds({ email: "", password: "" });
 
-       
-        // setTimeout(()=>{
-        //     window.location.assign(window.location.origin + "/");
-        // }, 2000)
         
     };
     useEffect(() => {        

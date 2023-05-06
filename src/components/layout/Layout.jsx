@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import ThemeAction from '../../redux/actions/ThemeAction'
 
 const Layout = () => {
-    // const auth = useSelector(state=>state.auth.authenticate)
     const token = localStorage.getItem("token")
 
     const themeReducer = useSelector(state => state.ThemeReducer)
@@ -30,34 +29,9 @@ const Layout = () => {
         dispatch(ThemeAction.setColor(colorClass))
     }, [dispatch])
 
-    // if(token){
         return (
             <h1>hhhh</h1>
-        // <BrowserRouter>
-        //     <Route render={(props) => (
-        //         <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
-        //             <Sidebar {...props}/>
-        //             <div className="layout__content">
-        //                 <TopNav/>
-        //                 <div className="layout__content-main">
-        //                     <Routes/>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     )}/>
-        // </BrowserRouter>
     )
-    // }else{
-    //     // return (
-    //     //     <BrowserRouter>
-    //     //         <Route render={(props) => (
-    //     //             <div className="layout__content-main">
-    //     //                 <Routes/>
-    //     //             </div>
-    //     //         )}/>
-    //     //     </BrowserRouter>
-    //     // )
-    // }
 }
 
 export default Layout

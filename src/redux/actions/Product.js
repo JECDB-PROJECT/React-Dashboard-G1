@@ -57,7 +57,6 @@ export const deleteProduct = (id) => async (dispatch) => {
       position: toast.POSITION.TOP_RIGHT,
     });
   } catch (err) {
-    console.log(err);
     toast.error(`${err.message} `, {
       position: toast.POSITION.TOP_RIGHT,
     });
@@ -91,7 +90,6 @@ export const UpdateProduct = (pro, id) => async (dispatch) => {
 
 export const GetProductsCategories = () => async (dispatch) => {
   try {
-      //   console.log(dispatch)
       const response = await axiosInstance.get(`/products/chart/productCategories`);
       console.log('response', response)
       dispatch({

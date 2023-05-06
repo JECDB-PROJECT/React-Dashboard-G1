@@ -3,14 +3,12 @@ import React, {Suspense,useEffect} from 'react'
 import { Route, Switch ,Redirect,BrowserRouter} from 'react-router-dom'
 
 import Dashboard from '../pages/Dashboard'
-// import Customers from '../pages/Customers'
 import Login from '../pages/Login/Login'
 import Customers from '../pages/User/Users/Users'
 import AddUser from '../pages/User/AddUser/AddUser'
 import EditUser from '../pages/User/EditUser/EditUser'
 import Countries from '../pages/Country/Countries/Countries'
 import AddCountry from '../pages/Country/AddCountry/AddCountry'
-// import EditCountry from '../pages/Country/EditCountry/EditCountry'
 import Orders from '../pages/Order/Orders/Orders'
 import OrderDetails from '../components/OrderDetails/OrderDetails'
 import PrivateRoute from './PrivateRoute'
@@ -24,9 +22,7 @@ import FormProduct from '../pages/Product/FormProduct/FormProduct'
 import ProductDetails from './../pages/Product/ProductDetails/index'
 import GetGoverment from './../pages/Governate/Governate'
 import AddGovernate from './../pages/Governate/AddGovernate/AddGovernate'
-// import EditeGovernate from './../pages/Governate/EditGovernate/EditGovernate'
 import GetCities from './../pages/Cities/Cities'
-// import EditeCity from './../pages/Cities/EditCities/EditCities'
 import AddCities from './../pages/Cities/AddCities/AddCities'
 import { useSelector, useDispatch } from 'react-redux'
 import ThemeAction from '../redux/actions/ThemeAction'
@@ -35,16 +31,11 @@ import TopNav from './topnav/TopNav'
 import './layout/layout.css'
 import NotFound from './../pages/NotFound'
 import UserDetails from '../pages/User/UserDetails/UserDetails'
-// import EditAddress from '../pages/User/UserDetails/EditAddress'
-// import Coupons from '../pages/Coupon/Coupons'
-// import AddCoupons from '../pages/Coupon/AddCoupons';
-// import EditCoupon from '../pages/Coupon/EditCoupon'
 import Sellers from '../pages/sellers/sellers/sellers'
 import SellerOrders from '../pages/sellers/SellerOrders/SellerOrders'
 import CategoryDetails from '../pages/Category/CategoryDetails'
 import CategoryForm from '../pages/Category/AddCategory/CategoryForm'
 
-// import { useSelector, useDispatch } from 'react-redux'
 
 
 
@@ -78,11 +69,9 @@ const Routes = () => {
                         <PrivateRoute path='/' exact component={Dashboard}/>
                         <PrivateRoute path='/Users' exact component={Customers}/>
                         <PrivateRoute path='/AddUser' exact component={AddUser}/>
-                        {/* <PrivateRoute path='/AddUser/:id' exact component={AddUser}/> */}
                         <PrivateRoute path='/EditUser/:id' exact component={EditUser}/>
                         <PrivateRoute path='/Countries' exact component={Countries}/>
                         <PrivateRoute path='/AddCountry' exact component={AddCountry}/>
-                        {/* <PrivateRoute path='/EditCountry/:id' exact component={EditCountry}/> */}
                         <PrivateRoute path='/orders' exact component={Orders}/>
                         <PrivateRoute path='/orderDetails' exact component={OrderDetails}/>            
                         <PrivateRoute path="/category" exact component={Category}/>
@@ -100,22 +89,15 @@ const Routes = () => {
                         <PrivateRoute path="/ProductDetails/:id" exact component={ProductDetails}/>
                         <PrivateRoute path="/Governate" exact component={GetGoverment}/>
                         <PrivateRoute path="/AddGovernate" exact component={AddGovernate}/>
-                        {/* <PrivateRoute path="/EditeGovernate/:nameg" exact component={EditeGovernate}/> */}
                         <PrivateRoute path="/Cities" exact component={GetCities}/> 
-                        {/* <PrivateRoute path="/EditeCity/:id" exact component={EditeCity}/> */}
                         <PrivateRoute path="/AddCety" exact component={AddCities}/>
                         <PrivateRoute path="/UserDetails/:id" exact component={UserDetails}/>
-                        {/* <PrivateRoute path="/EditAddress/:id" exact component={EditAddress}/> */}
-                        {/* <PrivateRoute path="/Coupons" exact component={Coupons}/>
-                        <PrivateRoute path="/AddCoupon" exact component={AddCoupons}/>
-                        <PrivateRoute path="/EditCoupon/:id" exact component={EditCoupon}/> */}
                         <PrivateRoute path="/sellers" exact component={Sellers}/>
                         <PrivateRoute path="/seller-orders/:id" exact component={SellerOrders}/>
                         
 
                         </div>
                     </div>
-                    {/* <Route path="*" exact={true}  component={NotFound} /> */}
                 </div>
             )}/>
             

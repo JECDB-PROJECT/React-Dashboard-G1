@@ -25,7 +25,7 @@ library.add(faPenToSquare, faTrashAlt, faSave)
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
-document.title = 'Jumia Dashboard'
+document.title = 'Jumia-Admin-Dashboard'
 
 ReactDOM.render(
   <Provider store={store}>

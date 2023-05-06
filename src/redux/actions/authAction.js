@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 export const signIn = (data)=> async(dispatch)=>{
     try{
         const res = await axiosInstance.post(`/auth/admin`,data);
-        console.log("from action",res)
         dispatch({
             type: "SIGN_IN",
             payload:{
@@ -18,13 +17,11 @@ export const signIn = (data)=> async(dispatch)=>{
                 position: toast.POSITION.TOP_RIGHT,
             })
     }catch(err){
-        console.log(err.response)
         toast.error(err.response?.data, {
             position: toast.POSITION.TOP_RIGHT,
         });
     }
 }
-////////////////
 
 export const signOut = ()=> async(dispatch)=>{
     try{

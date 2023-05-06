@@ -14,7 +14,6 @@ const [searchTerm,setSearchTerm] = useState('')
     const dispatch = useDispatch();
     const { orders } = useSelector(state => state.orders)
     const { govers } = useSelector(state => state.goverments)
-    // console.log(">>>>>>",gov)
     const { num } = useParams() || 1;
     const [page, setPage] = useState(num);
     const pages = total || 1;
@@ -38,9 +37,7 @@ const [searchTerm,setSearchTerm] = useState('')
         setState({ ...state, [name]: value })
     }
 
-    // useEffect(() => {
-    //     dispatch(getOrdersList());
-    // }, []);
+    
     useEffect(() => {
         dispatch(getOrderPaginationtList(page, state));
     }, [page, state]);
@@ -64,7 +61,6 @@ const [searchTerm,setSearchTerm] = useState('')
                         <option value='payMeth'>Payment Method</option>
                         <option value='governate'>governate</option>
                         <option value='Status'>Status</option>
-                        {/* <option value='category'>category</option> */}
 
                     </select>
                     </div>
@@ -75,7 +71,7 @@ const [searchTerm,setSearchTerm] = useState('')
                         {
                             checkKey && checkKey === 'payMeth' &&
                             <>
-                                <option value='PayPal'>PayPal</option>
+                                <option value='PayPal'>stripe</option>
                                 <option value='CashOnDelivery'>CashOnDelivery</option>
                             </>
                         }

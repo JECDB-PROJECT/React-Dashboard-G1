@@ -30,8 +30,6 @@ export default function CetyTable({ CityData, keyc }) {
                 </td>
                 <td className="col ">
                     <div className="p-2 icons">
-                        {/* <Link to={'/EditUser/'} className="nav-link d-inline">
-                              <i class="bi bi-eye showicon"></i></Link> */}
                         <Link to={'/EditeCity/' + CityData._id} className="nav-link d-inline"> <i className="bi bi-pencil-square upicon"></i></Link>
                         <i class="bi bi-trash-fill delicon" onClick={() => handeldelete(CityData._id)}></i> </div>
                 </td>

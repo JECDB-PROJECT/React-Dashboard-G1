@@ -1,7 +1,6 @@
 const initialize = {
     users: [],
     user: {},
-    // productsCategories: []
 };
 
 export const UsersReducer = (state = initialize, action) => {

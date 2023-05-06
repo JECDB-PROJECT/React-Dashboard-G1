@@ -38,7 +38,6 @@ export const ProductsReducer = (state = initialize, action) => {
                 ...state,
                 product: action.payload
             }
-        // reviews
         case "GET_REVIEWS_SINGIL_Product":
             return {
                 ...state,

@@ -65,7 +65,6 @@ const ordersReducer = (state = initialize, action) => {
                 WeekIncome: action.payload
             }
         case "GET_ORDER_LIST_PAGE":
-            console.log(action.payload, 'kk')
             return {
                 ...state,
                 orders: action.payload

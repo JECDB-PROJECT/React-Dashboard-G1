@@ -1,7 +1,6 @@
 import { axiosInstance } from '../../netWork/netWork'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { GetSingleCategory } from './Category';
 
 const config = {
   headers: {
@@ -22,12 +21,9 @@ export const getCategoryList = () => async (dispatch) => {
 };
 
 export const GetSingleCategory = (id) => async (dispatch) => {
-  console.log(`************ id is ${id}`);
   try {
-    //   console.log(dispatch)
     const response = await axiosInstance.get(`/category/Admin/speciefic/${id}`);
 
-    console.log('******* GetSingleCategory', response.data)
     dispatch({
       type: "GET_SINGIL_Category",
       payload: response.data,
@@ -52,7 +48,6 @@ export const deleteCategory = (id) => async (dispatch) => {
       position: toast.POSITION.TOP_RIGHT,
     });
   } catch (err) {
-    console.log(err);
     toast.error(`${err.message} `, {
       position: toast.POSITION.TOP_RIGHT,
     });
@@ -70,7 +65,6 @@ export const AddCategory = (category) => async (dispatch) => {
       position: toast.POSITION.TOP_RIGHT,
     });
   } catch (err) {
-    console.log(err);
     toast.error(`${err.message} `, {
       position: toast.POSITION.TOP_RIGHT,
     });
@@ -79,9 +73,7 @@ export const AddCategory = (category) => async (dispatch) => {
 
 export const UpdateCategory = (Category, id) => async (dispatch) => {
   try {
-    //   console.log(dispatch)
     const response = await axiosInstance.put(`/category/${id}`, Category, config);
-    console.log('response to update', response)
     dispatch({
       type: "UPDATE_Category",
       payload: response.data,
@@ -90,7 +82,6 @@ export const UpdateCategory = (Category, id) => async (dispatch) => {
       position: toast.POSITION.TOP_RIGHT,
     });
   } catch (err) {
-    console.log(err);
     toast.error(`${err.message} `, {
       position: toast.POSITION.TOP_RIGHT,
     });
